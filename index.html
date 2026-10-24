@@ -529,7 +529,7 @@ function setPlane(){if(plane)scene.remove(plane);plane=makePlane(def());scene.ad
 const toast=m=>{const t=$('toast');t.textContent=m;t.style.opacity=1;clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.opacity=0,2800)};
 function hud(){$('cash').textContent=fmt(money);$('rank').textContent=rk_()+' · '+rep+' rep';$('job').textContent=job?`${job.urgent?'MEDEVAC ':''}${job.pax?job.pax+' pax':job.kg+' kg'} → ${job.to.id} · ${Math.max(0,job.left/60|0)}:${String(Math.max(0,job.left|0)%60).padStart(2,'0')} left`:'No active job';$('nav').style.display=job?'block':'none'}
 function crash(why){const f=Math.min(money,Math.round(money*.1+300));money-=f;rep=Math.max(0,rep-3);fleet[curId]={cond:25,fuel:def().fuel*.25};toast(why+' — recovery bill '+fmt(f));spawn(last);S.fuel=F().fuel;hud();save()}
-const PAYX=2,JOBS_PER_AIRPORT=16; // PAYX multiplies every job payout
+const PAYX=2,JOBS_PER_AIRPORT=30; // PAYX multiplies every job payout
 function mkJobs(a){const o=[],near=airportsNear(a.x,a.z,4).filter(b=>b!==a&&Math.hypot(a.x-b.x,a.z-b.z)>2000).slice(0,10),rn=Math.random;if(!near.length)return o;
  for(let tries=0;o.length<JOBS_PER_AIRPORT&&tries++<150;){const to=near[rn()*near.length|0],km=Math.round(Math.hypot(a.x-to.x,a.z-to.z)/100)/10,u=rn(),sc=u<.5?0:u<.8?1:2,urgent=rn()<.12;
   const pax=urgent?1:rn()<.5?[1+(rn()*3|0),4+(rn()*5|0),12+(rn()*60|0)][sc]:0,kg=pax?0:[40+(rn()*110|0),300+(rn()*600|0),1500+(rn()*7000|0)][sc]|0;

@@ -1,5 +1,5 @@
 // Bump VERSION whenever you deploy changes so players pick up the new files.
-const VERSION = 'skyhaul-v1';
+const VERSION = 'skyhaul-v2';
 const ASSETS = [
   './',
   'index.html',
